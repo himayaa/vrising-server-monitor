@@ -16,9 +16,6 @@ internal readonly record struct ItemTotal(PrefabGUID Item, int Amount);
 /// <summary>Shared building blocks for the chest-watch patches.</summary>
 internal static class ChestWatch
 {
-    // Set to true to also announce taking from your own storage (useful for solo testing).
-    public const bool AnnounceOwnWithdrawals = false;
-
     public static void Info(string message) => Core.Log.LogInfo($"[ChestWatch] {message}");
 
     /// <summary>Runs <paramref name="handle"/> for every entity in the query, isolating failures per event.</summary>
@@ -126,10 +123,10 @@ internal static class ChestWatch
         return true;
     }
 
-    /// <summary>True (with an exit log) when the actor owns the container and own withdrawals are not announced.</summary>
+    /// <summary>True (with an exit log) when the actor owns the container; taking from your own storage is never announced.</summary>
     public static bool IsOwnWithdrawal(Entity actorUser, Entity ownerUser)
     {
-        if (ownerUser == actorUser && !AnnounceOwnWithdrawals)
+        if (ownerUser == actorUser)
         { Info("Exit: actor owns the container"); return true; }
         return false;
     }
