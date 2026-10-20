@@ -1,6 +1,7 @@
 ﻿using BepInEx;
 using BepInEx.Unity.IL2CPP;
 using HarmonyLib;
+using ProjectM.Network;
 using VampireCommandFramework;
 
 namespace vrising_server_monitor;
@@ -11,8 +12,12 @@ public class Plugin : BasePlugin
 {
     Harmony _harmony;
 
+    
+
     public override void Load()
     {
+        Core.Log = Log;
+
         // Plugin startup logic
         Log.LogInfo($"Plugin {MyPluginInfo.PLUGIN_GUID} version {MyPluginInfo.PLUGIN_VERSION} is loaded!");
 

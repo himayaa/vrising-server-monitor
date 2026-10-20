@@ -18,4 +18,8 @@
     <PackageReference Include="VRising.Unhollowed.Client" Version="1.1.9.9219901" />
     <PackageReference Include="VRising.VampireCommandFramework" Version="0.11.0" />
   </ItemGroup>
+  <Target Name="CopyToServer" AfterTargets="Build">
+    <Copy SourceFiles="$(TargetPath)" 
+          DestinationFolder="D:\SteamLibrary\steamapps\common\VRisingDedicatedServer\BepInEx\plugins" />
+  </Target>
 </Project>
